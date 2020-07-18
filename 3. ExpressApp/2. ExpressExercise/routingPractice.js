@@ -24,7 +24,7 @@ app.get("/speak/:animal", function (req, res) {
         cow: "Moo",
         dog: "Woof Woof!",
         cat: "Bow to me Huuuman!",
-        ferret: "Let Wrestle!"
+        ferret: "Lets Wrestle!"
     }
     let sound = sounds[type]
     res.send("The " + type + " says " + sound)
