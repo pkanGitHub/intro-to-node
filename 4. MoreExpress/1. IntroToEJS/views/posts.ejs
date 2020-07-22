@@ -1,0 +1,15 @@
+<h1>The Posts Page</h1>
+
+<% for(let i = 0; i < postsAppear.length; i++){ %>
+<li>
+    <%= postsAppear[i].title %> - <strong><%= postsAppear[i].author %></strong>
+</li>
+<% } %>
+
+
+<!-- or  -->
+<% postsAppear.forEach(function(post){ %>
+<li>
+    <%= post.title %> - <strong><%= post.author %></strong>
+</li>
+<% }) %>
