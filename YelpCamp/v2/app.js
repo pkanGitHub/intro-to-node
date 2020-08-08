@@ -10,7 +10,8 @@ app.set("view engine", "ejs")
 // SCHEMA SETUP
 const campgroundSchema = new mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description: String
 })
 
 const Campground = mongoose.model("Campground", campgroundSchema)
@@ -18,7 +19,8 @@ const Campground = mongoose.model("Campground", campgroundSchema)
 // Campground.create(
 //     {
 //         name: "Mountain Goat's Rest",
-//         image: "https://www.photosforclass.com/download/px_2422265"
+//         image: "https://pixabay.com/get/57e8d1464d53a514f1dc84609620367d1c3ed9e04e507440732973d59f44cc_340.jpg",
+//         description: "There's many goats, very grassy"
 //     }, function (err, campground) {
 //         if (err) {
 //             console.log(err)
@@ -34,17 +36,19 @@ app.get("/", function (req, res) {
     res.render("landing")
 })
 
+//index
 app.get("/campgrounds", function (req, res) {
     // Get all campgrounds from DB
     Campground.find({}, function (err, allCampgrounds) {
         if (err) {
             console.log(err)
         } else {
-            res.render("campgrounds", { campgrounds: allCampgrounds })
+            res.render("index", { campgrounds: allCampgrounds })
         }
     })
 })
 
+// create
 app.post("/campgrounds", function (req, res) {
     // get data from form and add to campgrounds array
     let name = req.body.name
@@ -61,10 +65,30 @@ app.post("/campgrounds", function (req, res) {
     })
 })
 
+// New
 app.get("/campgrounds/new", function (req, res) {
     res.render("new.ejs")
 })
 
+//Show
+app.get("/campgrounds/:id", function (req, res) {
+    //find the campground with provided ID
+    res.render("show")
+})
+
+
+
 app.listen(3000, function () {
     console.log("server started")
 })
+
+
+
+// notes: 
+
+// "mongo" to open up mongoDB console
+// "show dbs" to view what database are there
+// "use <db name>" to switch to that database
+// "show collections" to show what collections are in that one database
+// "db.<collection name>.find()" to see what data already stored in it
+// "db.<collection name>.drop()" to clear everything in that database
