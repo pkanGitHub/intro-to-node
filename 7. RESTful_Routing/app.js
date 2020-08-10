@@ -39,11 +39,23 @@ app.get("/blogs/new", function (req, res) {
 })
 
 app.post("/blogs", function (req, res) {
-    // let title = req.body.title
-    // let image = req.body.image
-    // let body = req.body.body
-    // let newBlogs = { title: title, image: image, body: body }
-    res.redirect("/blogs")
+    Blog.create(req.body.blog, function (err, newBlog) {
+        if (err) {
+            res.render("new")
+        } else {
+            res.redirect("/blogs")
+        }
+    })
+})
+
+app.get("/blogs/:id", function (req, res) {
+    Blog.findById(req.params.id, function (err, foundBlog) {
+        if (err) {
+            res.redirect("/blogs")
+        } else {
+            res.render("show", { blog: foundBlog })
+        }
+    })
 })
 
 
