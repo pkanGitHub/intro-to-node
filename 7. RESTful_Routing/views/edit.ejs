@@ -1,0 +1,31 @@
+<h1>Edit page</h1>
+
+<%- include("partials/header") %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header">Edit <%= blog.title %></div>
+    <form class="ui form" action="/blogs/<%= blog._id%>?_method=PUT" method="POST">
+        <!-- ?_method=PUT" => will send the regular post req, but it has a query string, 
+            and method overrides will configure it inside of app.js so it'll 
+            look for the _method=PUT or DELETE then it'll treat it as PUT or DELETE req -->
+
+        <!-- DOESN'T DO ANYTHING UNTIL WE HAVE npm install method-override  -->
+
+        <div class="field">
+            <label>Title: </label>
+            <input type="text" name="blog[title]" value="<%= blog.title%>">
+        </div>
+        <div class="field">
+            <label>Image: </label>
+            <input type="text" name="blog[image]" value="<%= blog.image%>">
+        </div>
+        <div class="field">
+            <label>Post: </label>
+            <textarea name="blog[body]"><%= blog.body%></textarea>
+        </div>
+
+        <input class="ui violet basic button" type="submit">
+    </form>
+</div>
+
+<%- include("partials/footer") %>
